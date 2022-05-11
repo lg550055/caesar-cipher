@@ -1,3 +1,4 @@
+import pytest
 from caesar_cipher.cipher import encrypt, decrypt, crack
 
 
@@ -46,6 +47,15 @@ def test_round_trip():
     assert actual == expected
 
 
+def test_round_tripz():
+    original = "Gimme a Z!"
+    shift = 5
+    encrypted = encrypt(original, shift)
+    actual = decrypt(encrypted, shift)
+    expected = original
+    assert actual == expected
+
+
 def test_crack_phrase():
     phrase = "It was the best of times, it was the worst of times."
     encrypted = encrypt(phrase, 10)
@@ -54,6 +64,7 @@ def test_crack_phrase():
     assert actual == expected
 
 
+# @pytest.mark.skip()
 def test_crack_nonsense():
     phrase = "Ix fhw txe fofg of ndhrl, it nad tho hndrk of allkd."
     encrypted = encrypt(phrase, 10)
